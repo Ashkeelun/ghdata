@@ -1,3 +1,9 @@
+'''
+SPDX-License-Identifier: MIT
+
+Install ghdata package with pip.
+'''
+
 from setuptools import setup, find_packages
 from codecs import open
 from os import path
@@ -10,15 +16,15 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='ghdata',
-    version='0.1.5',
-    description='Library/CLI that gathers data related to GitHub repos',
+    version='0.1.7',
+    description='Library/Server for data related to the health and sustainability of GitHub projects',
     long_description=long_description,
     url='https://github.com/OSSHealth/github-data-cli',
     author='Derek Howard',
     author_email='derek@howderek.com',
 		packages=['ghdata'],
 		package_dir={'ghdata': 'ghdata'},
-		package_data={'': 'LICENSE'},
+		package_data={'': 'LICENSE', 'frontend': ['frontend/*']},
     license='MIT',
     classifiers=[
         'Development Status :: 1 - Planning',
@@ -33,16 +39,15 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
     ],
-
     keywords='ghtorrent github api data',
-    install_requires=['Click', 'PyMySQL', 'records', 'requests', 'python-dateutil', 'sqlalchemy'],
+    install_requires=['flask', 'flask-cors', 'PyMySQL', 'requests', 'python-dateutil', 'sqlalchemy', 'pandas'],
     extras_require={
         'dev': ['check-manifest'],
         'test': ['coverage'],
     },
     entry_points={
         'console_scripts': [
-            'ghdata=ghdata.cli:cli',
+            'ghdata=ghdata.server:init',
         ],
     },
 )
